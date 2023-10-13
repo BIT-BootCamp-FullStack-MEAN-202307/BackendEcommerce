@@ -11,19 +11,11 @@ app.use( cors() );          // Implementacion de un Middleware en Express
 dbConection();
 
 /** Rutas */
-app.get( '/',function( req, res ) {
-    res.send( '<h1>home</h1>' );
-});
-app.get( '/user', function( req, res ) {
-    const luis = {
-        name: 'Luis Zarate',
-        profession: 'Ingeniero'
-    }
-    res.json( luis );
-});
+app.use( '/api/auth', require( './routes/auth.routes' ) );          // http://localhost:4001/api/auth
+app.use( '/api/products', require( './routes/product.routes' ) );   // http://localhost:4001/api/products
 
 
-/** Ejecuta  */
+/** Lanza el servidor en: http://localhost:4001  */
 app.listen( PORT, () => {
     console.log( `Servidor  lanzado... express en el puerto ${ PORT }` );
 } );
