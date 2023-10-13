@@ -1,11 +1,14 @@
-require( 'dotenv' ).config();
+require( 'dotenv' ).config();   
 const
     express = require( 'express' ),
     app = express(),
     PORT = process.env.PORT || 4000,  
-    cors = require( 'cors' );
+    cors = require( 'cors' ),
+    { dbConection } = require( './config/mongo.config' );
 
 app.use( cors() );          // Implementacion de un Middleware en Express
+
+dbConection();
 
 /** Rutas */
 app.get( '/',function( req, res ) {
@@ -24,3 +27,4 @@ app.get( '/user', function( req, res ) {
 app.listen( PORT, () => {
     console.log( `Servidor  lanzado... express en el puerto ${ PORT }` );
 } );
+
